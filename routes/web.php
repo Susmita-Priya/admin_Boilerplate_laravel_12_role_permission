@@ -11,11 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(callback: function () {
 
     Route::get('/index', [IndexController::class, 'adminIndex'])->name("index");
 
