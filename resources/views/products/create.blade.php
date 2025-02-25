@@ -6,48 +6,72 @@
 @endpush
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Add New Product</h2>
+<div class="content">
+    <div class="container-fluid">
+        <!-- Breadcrumb -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box">
+                    <h4 class="page-title float-left">Add Product</h4>
+                    <ol class="breadcrumb float-right">
+                        <li class="breadcrumb-item"><a href="{{ route('index') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Add Product</li>
+                    </ol>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-primary btn-sm" href="{{ route('products.index') }}"><i class="fa fa-arrow-left"></i> Back</a>
+
+        <!-- Asset Form -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-box">
+                    
+                    <form action="{{ route('products.store') }}" method="POST">
+                        @csrf
+
+                        <div class="container mt-5">
+                            <div class="col-md-12">
+                                <div class="card-box">
+                                    <h1 class="d-flex justify-content-center mt-4">ADD PRODUCT</h1>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="name" class="col-form-label">Name</label>
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                placeholder="Enter Product">
+                                            <span class="text-danger">
+                                                @error('name')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="detail" class="form-label">Detail</label>
+                                            <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
+                                            <span class="text-danger">
+                                                @error('duration')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" class="btn waves-effect waves-light btn-sm submitbtn">
+                                        Add 
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
-<form action="{{ route('products.store') }}" method="POST">
-    @csrf
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Detail:</strong>
-                <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail"></textarea>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary btn-sm mb-3 mt-2"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
-        </div>
-    </div>
-</form>
 
 @endsection
